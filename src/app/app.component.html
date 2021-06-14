@@ -1,0 +1,24 @@
+<mat-sidenav-container class="example-container" [hasBackdrop]="false">
+    <mat-sidenav #sidenav mode="over" [(opened)]="sideNavOpened" disableClose>
+        <app-station-profile [data]="data"></app-station-profile>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <app-main-map (selectedPointEvent)="selectedPoint = $event"></app-main-map>
+
+        <div class="panel-wrapper" [ngClass]="data != null ? 'open' : ''">
+            <mat-expansion-panel hideToggle [expanded]="panelExpanded">
+                <!-- #enddocregion hide-toggle -->
+                <!-- <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        This is the expansion title
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        This is a summary of the content
+                    </mat-panel-description>
+                </mat-expansion-panel-header> -->
+                <app-timeline [data]="data"></app-timeline>
+            </mat-expansion-panel>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

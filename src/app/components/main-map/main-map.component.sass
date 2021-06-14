@@ -1,0 +1,56 @@
+:host
+    display: flex
+    flex-direction: column
+    flex: 1
+    height: 100vh
+
+mgl-map 
+    height: 100%
+    width: 100%
+
+.popup-content
+    display: flex
+    align-items: center
+    border-radius: 32px
+    padding: 3px 7px
+    background: #fdfbfb
+    color: #989898
+    box-shadow: 0 9px 12px rgb(0 0 0 / 16%)
+    &.selected
+        font-size: 115%
+        padding: 6px 12px
+        .aqi-value
+            width: 31px
+            height: 31px
+            line-height: 31px
+            margin-right: 7px
+    .aqi-value
+        display: inline-block
+        width: 26px
+        height: 26px
+        text-align: center
+        line-height: 26px
+        background: rgba(55,148,179,0.5)
+        color: #fff
+        border-radius: 32px
+        margin-right: 4px
+        &[aqi-value="1"]
+            background: #8CB917
+        &[aqi-value="2"]
+            background: #A2C618
+        &[aqi-value="3"]
+            background: #BEC617
+        &[aqi-value="4"]
+            background: #FFCC32
+        &[aqi-value="5"]
+            background: #FFA33B
+        &[aqi-value="6"]
+            background: #FF7344
+        &[aqi-value="7"]
+            background: #FF494B
+        &[aqi-value="8"]
+            background: #D63B50
+        &[aqi-value="9"]
+            background: #AC2D55
+        &[aqi-value="10"]
+            background: #821D5A

@@ -1,0 +1,85 @@
+<div>
+  <div class="analytics-wrapper" *ngIf="timelineValue?.data">
+    <div class="aqi-block">
+      <div class="aqi-block-title">
+        <div class="aqi-block-description">
+          Current values
+        </div>
+        <div class="aqi-block-date">
+          {{timelineValue?.to | date:'dd MMMM, hh:mm'}}
+        </div>
+      </div>
+      <div class="aqi-block-body">
+        <div class="aqi-block">
+          <span *ngIf="timelineValue?.data?.temperature">
+            <span class="value">{{timelineValue?.data?.temperature | normalizeIndicators}}</span> °C
+          </span>
+          <span *ngIf="timelineValue?.data?.humidity">
+            <span class="value">{{timelineValue?.data?.humidity | normalizeIndicators}}</span> %
+          </span>
+          <span *ngIf="timelineValue?.data?.pm10">
+            <span class="value">{{timelineValue?.data?.pm10 | normalizeIndicators}}</span> pm10
+          </span>
+          <span *ngIf="timelineValue?.data?.pm25">
+            <span class="value">{{timelineValue?.data?.pm25 | normalizeIndicators}}</span> pm2.5
+          </span>
+          <span *ngIf="timelineValue?.data?.pressure">
+            <span class="value">{{timelineValue?.data?.pressure | normalizeIndicators}}</span> bar
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="gray-line" *ngIf="!timelineValue?.data"></div>
+  <div class="profile">
+    <div class="profile-title">
+      Ecological profile
+    </div>
+    <div class="profile-change-period-block">
+      <mat-button-toggle-group [(ngModel)]="season" [name]="'station-season-button'">
+        <mat-button-toggle value="total">
+          Total
+        </mat-button-toggle>
+        <mat-button-toggle value="summer">
+          Summer
+        </mat-button-toggle>
+        <mat-button-toggle value="autumn">
+          Autumn
+        </mat-button-toggle>
+        <mat-button-toggle value="winter">
+          Winter
+        </mat-button-toggle>
+        <mat-button-toggle value="spring">
+          Spring
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+  </div>
+  <div class="gray-line"></div>
+  <div class="graph-block">
+    <div class="graph-title">
+      The history of air quality observations
+    </div>
+    <div class="graph-container">
+      <app-aqi-chart [data]="data" [season]="season" [type]="'aqiPercentage'"></app-aqi-chart>
+    </div>
+  </div>
+  <div class="gray-line"></div>
+  <div class="graph-block">
+    <div class="graph-title">
+      Average air quality within 24 hrs
+    </div>
+    <div class="graph-container">
+      <app-aqi-chart [data]="data" [season]="season" [type]="'aqiByHours'"></app-aqi-chart>
+    </div>
+  </div>
+  <div class="gray-line"></div>
+  <div class="graph-block">
+    <div class="graph-title">
+      Average air quality by days of the week
+    </div>
+    <div class="graph-container">
+      <app-aqi-chart [data]="data" [season]="season" [type]="'aqiWeekly'"></app-aqi-chart>
+    </div>
+  </div>
+</div>

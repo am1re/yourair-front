@@ -1,0 +1,46 @@
+<mgl-map [style]="'mapbox://styles/am1re/ckpv1bv6n3jma18mg57mantts'" [zoom]="zoom" [center]="center"
+  [cursorStyle]="cursorStyle" (mapLoad)="map = $event" (click)="onClickGlobal($event)">
+  <mgl-geojson-source id="points" [data]="points"></mgl-geojson-source>
+  <mgl-layer id="points" source="points" type="circle" [paint]="{
+                  'circle-stroke-width': 1,
+                  'circle-stroke-color': '#ffffff',
+                  'circle-radius': {
+                    'base': 2,
+                    'stops': [
+                      [12, 3],
+                      [22, 180],
+                    ]
+                    },
+                    'circle-color': [
+                      'match',
+                      ['get', 'aqi'],
+                      1, '#8CB917',
+                      2, '#A2C618',
+                      3, '#BEC617',
+                      4, '#FFCC32',
+                      5, '#FFA33B',
+                      6, '#FF7344',
+                      7, '#FF494B',
+                      8, '#D63B50',
+                      9, '#AC2D55',
+                      10, '#821D5A',
+                      '#9bcad9'
+                    ]
+                  }" (layerClick)="onClickPoint($event)" (layerMouseEnter)="onLayerMouseEnter($event)"
+    (layerMouseLeave)="onLayerMouseLeave($event)">
+  </mgl-layer>
+  <mgl-popup *ngIf="hoverFeature" [feature]="hoverFeature" [closeOnClick]="false">
+    <div class="popup-content">
+      <span class="aqi-value" [attr.aqi-value]="hoverFeature?.properties?.aqi">
+        {{hoverFeature?.properties?.aqi ? hoverFeature?.properties?.aqi : "n/a"}}
+      </span> <b>{{getAqiStatusText(hoverFeature?.properties?.aqi)}}</b>
+    </div>
+  </mgl-popup>
+  <mgl-popup *ngIf="selectedPoint" [feature]="selectedPoint" [closeOnClick]="false">
+    <div class="popup-content selected">
+      <span class="aqi-value" [attr.aqi-value]="selectedPoint?.properties?.aqi">
+        {{selectedPoint?.properties?.aqi ? selectedPoint?.properties?.aqi : "n/a"}}
+      </span> <b>{{getAqiStatusText(selectedPoint?.properties?.aqi)}}</b>
+    </div>
+  </mgl-popup>
+</mgl-map>
